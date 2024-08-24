@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-p)zmzq_t&1(+@qyu_z0x)6q2ioympasr3&dw1hpxlj10=gf12&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', 'electricity_bill_payment.com']
+ALLOWED_HOSTS = ['.vercel.app', 'https://electricity-bill-payment-project-3zj1.vercel.app/']
 
 
 # Application definition
