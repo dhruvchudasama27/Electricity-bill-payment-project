@@ -1,0 +1,361 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Electricity bill</title>
+    <link rel="icon" type="image/png" href="{% static 'assets/images/flash.png' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="body">
+    <!-- header start -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}"
+          ><img src="{% static 'assets/images/flash.png' %}" height="50px" width="50px" alt=""
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item p-1">
+              <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item p-1">
+              <a class="nav-link active" aria-current="page" href="#"
+                >View Bill</a
+              >
+            </li>
+            <li class="nav-item p-1">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Pay Bill</a
+              >
+            </li>
+            <li class="nav-item p-1">
+              <a class="nav-link active" aria-current="page" href="{% url 'payment_history' %}"
+                >Payment History</a
+              >
+            </li>
+            <li class="nav-item p-1">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Tariff Rates</a
+              >
+            </li>
+            <li class="nav-item p-1">
+              <a class="nav-link active" aria-current="page" href="{% url 'contact_us' %}"
+                >Support</a
+              >
+            </li>
+            {% if request.session.email %}
+            <li class="nav-item p-1">
+              <a class="nav-link active" aria-current="page" href="{% url 'profile' %}"
+                >My Account</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+          <div class="ms-auto">
+            <ul class="navbar-nav">
+              {% if request.session.email %}
+              <li class="nav-item p-1">
+                <a href="{% url 'logout' %}" class="nav-link active">logout</a>
+              </li>
+              {% else %}
+              <li class="nav-item p-1">
+                <a href="{% url 'login' %}" class="nav-link active">login</a>
+              </li>
+              {% endif %}
+              {% if not request.session.email %}
+              <li class="nav-item p-1">
+                <a href="{% url 'registration' %}" class="nav-link active">register</a>
+              </li>
+              {% endif %}
+              <li class="nav-item p-1">
+                <a href="#" class="nav-link active"
+                  ><img
+                    src="{% static 'assets/images/notification.png' %}"
+                    alt=""
+                    class="notification-icon"
+                /></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- header end -->
+    {% block content %}
+    <!-- page content start -->
+     
+    <!-- First Section: Company Images and Description -->
+    <section class="py-5">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-md-6">
+                  <img src="{% static 'assets/images/electricity1.jpg' %}" class="img-fluid rounded" alt="Company Image 1">
+                  <p class="mt-3">We have been leading the energy industry with our innovative solutions for over 20 years. Our commitment to quality and customer satisfaction sets us apart.</p>
+              </div>
+              <div class="col-md-6">
+                  <img src="{% static 'assets/images/electricity2.jpg' %}" class="img-fluid rounded" alt="Company Image 2">
+                  <p class="mt-3">Our state-of-the-art facilities ensure that you receive the best service possible. We are continuously improving to meet the demands of a changing world.</p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Second Section: Electricity News and Rates -->
+  <section class="py-5">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6">
+                  <h3 class="text-center">Latest Electricity News</h3>
+                  <marquee behavior="scroll" direction="up" scrollamount="2" class="mt-3">
+                      <ul>
+                          <li>New green energy initiatives launched nationwide.</li>
+                          <li>Electricity prices expected to decrease by 5% next month.</li>
+                          <li>Government introduces subsidies for energy-efficient appliances.</li>
+                          <li>Upcoming power outage scheduled for maintenance on 5th Aug.</li>
+                      </ul>
+                  </marquee>
+              </div>
+              <div class="col-md-6">
+                  <h3 class="text-center">Last 12 Months Electricity Rates</h3>
+                  <marquee behavior="scroll" direction="up" scrollamount="2" class="mt-3">
+                      <ul>
+                          <li>August: $0.12/kWh</li>
+                          <li>July: $0.13/kWh</li>
+                          <li>June: $0.11/kWh</li>
+                          <li>May: $0.10/kWh</li>
+                          <li>April: $0.09/kWh</li>
+                          <li>March: $0.08/kWh</li>
+                          <li>February: $0.07/kWh</li>
+                          <li>January: $0.06/kWh</li>
+                          <li>December: $0.05/kWh</li>
+                          <li>November: $0.04/kWh</li>
+                      </ul>
+                  </marquee>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Third Section: Facility Information -->
+  <section class="py-5">
+      <div class="container">
+          <div class="row text-center">
+              <div class="col-md-4">
+                  <h4>24/7 Customer Support</h4>
+                  <p>We are here to assist you anytime, day or night. Our support team is just a call away.</p>
+              </div>
+              <div class="col-md-4">
+                  <h4>Online Bill Payments</h4>
+                  <p>Pay your electricity bills easily online with our secure payment gateway.</p>
+              </div>
+              <div class="col-md-4">
+                  <h4>Energy Efficiency Tips</h4>
+                  <p>Learn how to save energy and reduce your electricity bills with our expert tips.</p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Fourth Section: Customer Reviews -->
+  <section class=" py-5">
+      <div class="container">
+          <h3 class="text-center mb-4">Latest Customer Reviews</h3>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="d-flex mb-3">
+                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 1" style="width: 50px; height: 50px;">
+                      <div class="ml-3">
+                          <strong>Sarah</strong>
+                          <p>"Great service, always reliable!"</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mb-3">
+                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 2" style="width: 50px; height: 50px;">
+                      <div class="ml-3">
+                          <strong>Michael</strong>
+                          <p>"Quick and easy bill payments."</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mb-3">
+                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 3" style="width: 50px; height: 50px;">
+                      <div class="ml-3">
+                          <strong>Emily</strong>
+                          <p>"Friendly customer support."</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mb-3">
+                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 4" style="width: 50px; height: 50px;">
+                      <div class="ml-3">
+                          <strong>David</strong>
+                          <p>"Highly recommend this company."</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mb-3">
+                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 5" style="width: 50px; height: 50px;">
+                      <div class="ml-3">
+                          <strong>Jessica</strong>
+                          <p>"The website is user-friendly."</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="d-flex mb-3">
+                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 6" style="width: 50px; height: 50px;">
+                      <div class="ml-3">
+                          <strong>Robert</strong>
+                          <p>"Efficient and trustworthy."</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mb-3">
+                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 7" style="width: 50px; height: 50px;">
+                      <div class="ml-3">
+                          <strong>Linda</strong>
+                          <p>"I've been a customer for years."</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mb-3">
+                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 8" style="width: 50px; height: 50px;">
+                      <div class="ml-3">
+                          <strong>Paul</strong>
+                          <p>"They keep improving their services."</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mb-3">
+                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 9" style="width: 50px; height: 50px;">
+                      <div class="ml-3">
+                          <strong>Karen</strong>
+                          <p>"Good value for money."</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mb-3">
+                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 10" style="width: 50px; height: 50px;">
+                      <div class="ml-3">
+                          <strong>James</strong>
+                          <p>"Excellent overall experience."</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Last Section: Company Information -->
+  <section class="py-5">
+      <div class="container">
+          <h3 class="text-center mb-4">Company Information</h3>
+          <div class="row text-center">
+              <div class="col-md-4">
+                  <h5>Customer Care</h5>
+                  <p>Phone: 123-456-7890</p>
+                  <p>Email: support@electricitycompany.com</p>
+              </div>
+              <div class="col-md-4">
+                  <h5>Address</h5>
+                  <p>123 Energy Street, Power City, PC 12345</p>
+              </div>
+              <div class="col-md-4">
+                  <h5>Payment Methods</h5>
+                  <p>We accept: Visa, MasterCard, PayPal, and more.</p>
+              </div>
+          </div>
+          <p class="text-center mt-4">"Empowering your life with our energy solutions."</p>
+      </div>
+  </section>
+
+    <!-- page content end -->
+
+    {% endblock %}
+    <!-- footer start -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-6 mt-1">
+            <h3>About Us</h3>
+            <ul>
+              <li><a href="#">Our Story</a></li>
+              <li><a href="#">Our Team</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-6 mt-1">
+            <h3>Help</h3>
+            <ul>
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#">Support</a></li>
+              <li><a href="#">Terms and Conditions</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-6 mt-1">
+            <h3>Follow Us</h3>
+            <ul class="social">
+              <li>
+                <a href="#"
+                  ><img src="{% static 'assets/images/facebook.png' %}" alt="" />Facebook</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img src="{% static 'assets/images/instagram.png' %}" alt="" />Instagram</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img src="{% static 'assets/images/twitter.png' %}" alt="" />Twitter</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-6 mt-1">
+            <h3>Payment Methods</h3>
+            <ul class="paymnet">
+              <li>
+                <a href="#"><img src="{% static 'assets/images/visa.png' %}" alt="" />Visa</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><img src="{% static 'assets/images/card.png' %}" alt="" />MasterCard</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="{% static 'assets/images/payment-method.png' %}"
+                    alt=""
+                  />Online</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="text-center mt-2">
+          &copy; 2024 Electricity Bill Payment Website. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <!-- footer end -->
+
+    <script src="{% static 'assets/js/script.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>

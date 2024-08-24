@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <!-- page content start -->
+    <section class="terms-section">
+        <div class="container">
+            <h2 class="text-center mb-4">Terms and Conditions</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <p class="mb-4">These Terms and Conditions govern your use of our website and the services we offer. By accessing or using our website, you agree to be bound by these Terms and Conditions.</p>
+
+                    <h4>1. Acceptance of Terms</h4>
+                    <p>By using our website, you agree to comply with and be bound by these Terms and Conditions. If you do not agree, please do not use our services.</p>
+
+                    <h4>2. Modification of Terms</h4>
+                    <p>We reserve the right to modify these Terms and Conditions at any time. Any changes will be effective immediately upon posting on this page.</p>
+
+                    <h4>3. User Responsibilities</h4>
+                    <p>You agree to use our website only for lawful purposes and in a manner that does not infringe the rights of, restrict, or inhibit anyone else's use of the website.</p>
+
+                    <h4>4. Account Security</h4>
+                    <p>You are responsible for maintaining the confidentiality of your account information, including your password, and for all activities that occur under your account.</p>
+
+                    <h4>5. Payment Terms</h4>
+                    <p>All payments made through our website are subject to the terms and conditions specified at the time of the transaction. You agree to provide accurate and complete payment information.</p>
+
+                    <h4>6. Limitation of Liability</h4>
+                    <p>We are not liable for any direct, indirect, incidental, or consequential damages arising from your use of our website or services.</p>
+
+                    <h4>7. Governing Law</h4>
+                    <p>These Terms and Conditions are governed by the laws of the jurisdiction in which our company is based. Any disputes will be resolved in the courts of that jurisdiction.</p>
+
+                    <h4>8. Contact Us</h4>
+                    <p>If you have any questions about these Terms and Conditions, please contact us at <a href="{% url 'contact_us' %}">ContactUs</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- page content end -->
+{% endblock %}

@@ -1,0 +1,29 @@
+1. Home Page (index.html):
+NAVBAR :- {Home,View Bill,Pay Bill,Payment History,Tariff Rates,Support,My Account,Notifications(right side ma last ma mukavu icon notification nu),Login/Register(Logout)}
+2. Login Page (login.html): <--completed-->
+-> otp generate Page <--completed-->
+-> reset password Page <--completed-->
+3. Registration Page (register.html): <--completed-->
+FIELD :- {Full Name,Email Address,Phone Number,Address(Street Address,City,State,Zip,country),Customer number,Password,Confirm Password,Agree to Terms and Conditions}
+4. Dashboard Page (dashboard.html): <--profile and billing info completed -->
+5. Bill Details Page (bill_details.html): <-- dashboard ma avi gayu completed -->
+6. Payment Page (payment.html): <-- completed -->
+7. Payment Confirmation Page (payment_confirmation.html): <-- completed -->
+8. Payment History Page (payment_history.html): <-- completed -->
+9. Account Settings Page (account_settings.html)(edit profile): <-- dashboard ma avi gayu completed -->
+11. Contact Us Page (contact.html): <-- completed -->
+12. About Us Page (about.html): <-- completed -->
+13. FAQ Page (faq.html): <-- completed -->
+14. Error Pages (error_404.html, error_500.html): <-- completed -->
+15. Additional Considerations: <-- completed -->
+->  Privacy Policy Page (privacy.html): Required for legal compliance. <-- completed -->
+->  Terms and Conditions Page (terms.html): Important for user agreements. <-- completed -->
+
+
+background color for website :- #FFFBDA
+
+super user :- admin password :- 123
+
+
+***  MODELS  ***
+1) user

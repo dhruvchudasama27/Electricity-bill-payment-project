@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <!-- page content start -->
+    <div class="container my-4">
+        <!-- Filter Section -->
+        <div class="row mb-3">
+            <div class="col-md-8">
+                <h4>Filter Payments</h4>
+                <form id="filter-form" class="row g-3">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <input type="date" id="start-date" class="form-control Phistory-form-control" placeholder="Start Date">
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <input type="date" id="end-date" class="form-control Phistory-form-control " placeholder="End Date">
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <button type="submit" class="btn btn-primary Phistory-btn-primary w-100">Apply Filter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        <!-- Payment History Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover Phistory-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Date</th>
+                        <th>Transaction ID</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="payment-history">
+                    <!-- Sample Data (Replace with dynamic data) -->
+                    <tr>
+                        <td>2024-08-01</td>
+                        <td>#123456</td>
+                        <td>$100.00</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr>
+                        <td>2024-08-05</td>
+                        <td>#123457</td>
+                        <td>$150.00</td>
+                        <td>Pending</td>
+                    </tr>
+                    <!-- More rows can be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- page content end -->
+{% endblock %}

@@ -1,0 +1,255 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <!-- page content start -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-lg-4 profile-col-lg-4">
+          <div class="card profile-card">
+            <div class="card-body text-center">
+              {% if uid.profile_photo.url %}
+              <img
+                src="{{ uid.profile_photo.url }}"
+                class="rounded-circle img-fluid mb-3 profile-img-fluid"
+                alt="User Image"
+                width="100"
+              />
+              {% else %}
+              <p>photo not selected</p>
+              {% endif %}
+              <h4 class="card-title profile-card-title">{{uid.name}}</h4>
+              <p class="card-text text-muted">{{uid.email}}</p>
+              <button
+                id="edit-profile-btn"
+                class="btn btn-primary btn-sm profile-btn-primary"
+              >
+                Edit Profile
+              </button>
+            </div>
+            <ul class="list-group m-1">
+              <li class="list-group-item profile-list-group-item">
+                Phone : {{uid.mobile_number}}
+              </li>
+              <li class="list-group-item profile-list-group-item">
+                Street Address : {{uid.street_address}}
+              </li>
+              <li class="list-group-item profile-list-group-item">
+                Pincode : {{uid.pincode}}
+              </li>
+              <li class="list-group-item profile-list-group-item">
+                City : {{uid.city}}
+              </li>
+              <li class="list-group-item profile-list-group-item">
+                State : {{uid.state}}
+              </li>
+              <li class="list-group-item profile-list-group-item">
+                Country : {{uid.country}}
+              </li>
+            </ul>
+            <ul class="list-group list-group-flush m-1 text-center">
+              <li class="list-group-item profile-list-group-item">
+                <a href="{% url 'index' %}">Dashboard</a>
+              </li>
+              <li class="list-group-item profile-list-group-item">
+                <a href="{% url 'payment_history' %}">Payment History</a>
+              </li>
+              {% if not billing_detail %}
+              <li class="list-group-item profile-list-group-item">
+                <a href="{% url 'billing_detail' %}">Add billing detail</a>
+              </li>
+              {% endif %}
+              <li class="list-group-item profile-list-group-item">
+                <a href="#">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {% if billing_detail %}
+        <div class="col-lg-8">
+          <div class="card profile-card">
+            <div class="card-header">Billing Information</div>
+            <div class="card-body">
+              <div class="mb-3">
+                <p class="border rounded p-1 shadow">Customer Id: {{billing_detail.customer_id }}</p>
+                <p class="border rounded p-1 shadow">
+                  Account Number: {{ billing_detail.account_number }}
+                </p>
+                <p class="border rounded p-1 shadow">
+                  Billing Address: {{ billing_detail.billing_address }}
+                </p>
+              </div>
+            </div>
+            <div class="card-footer text-center">
+              <button id="edit-billing-btn" class="btn btn-primary">
+                Edit Billing Information
+              </button>
+            </div>
+          </div>
+          {% endif %}
+          <div class="card mt-3">
+            <div class="card-header">Recent Payments</div>
+            <div class="card-body">
+              <ul class="list-group">
+                <li class="list-group-item">Payment on 01/08/2024 - $120</li>
+                <li class="list-group-item">Payment on 01/07/2024 - $115</li>
+                <li class="list-group-item">Payment on 01/06/2024 - $110</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% if billing_detail %}
+    <!-- Edit Billing Information Modal start -->
+    <div id="edit-billing-modal" class="modal">
+      <div class="modal-content">
+        <span class="billing-close-btn">&times;</span>
+        <h2>Edit Billing Information</h2>
+        <form id="edit-billing-form" action="{% url 'edit_billing_detail' billing_detail.id %}" method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="edit-customer" class="form-label">Customer Id</label>
+            <input
+              type="text"
+              id="edit-customer"
+              class="form-control"
+              value="{{billing_detail.customer_id}}"
+              name="c_id"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="edit-account" class="form-label">Account Number</label>
+            <input
+              type="text"
+              id="edit-account"
+              class="form-control"
+              value="{{billing_detail.account_number}}"
+              name="a_number"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="edit-billingAddress" class="form-label"
+              >Billing Address</label
+            >
+            <textarea id="edit-billingAddress" class="form-control" name="b_address">
+{{billing_detail.billing_address}}</textarea
+            >
+          </div>
+          <div class="text-center mt-2">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    {% endif %}
+    <!-- Edit Billing Information Modal end -->
+
+    <!-- Edit profile start -->
+    <div id="edit-profile-modal" class="profile-modal">
+      <div class="profile-modal-content">
+        <span class="profile-close-btn">&times;</span>
+        <h2>Edit Profile</h2>
+        <form id="edit-profile-form" action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="edit-name" class="form-label">Name</label>
+            <input
+              type="text"
+              id="edit-name"
+              class="form-control"
+              value="{{uid.name}}"
+              name="name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="edit-email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="edit-email"
+              class="form-control"
+              value="{{uid.email}}"
+              name="email"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="edit-phone" class="form-label">Phone</label>
+            <input
+              type="text"
+              id="edit-phone"
+              class="form-control"
+              value="{{uid.mobile_number}}"
+              name="mobile_number"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="edit-address" class="form-label">Street Address</label>
+            <input
+              type="text"
+              id="edit-address"
+              class="form-control"
+              value="{{uid.street_address}}"
+              name="street_address"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="edit-pincode" class="form-label">Pincode</label>
+            <input
+              type="text"
+              id="edit-pincode"
+              class="form-control"
+              value="{{uid.pincode}}"
+              name="pincode"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="edit-city" class="form-label">City</label>
+            <input
+              type="text"
+              id="edit-city"
+              class="form-control"
+              value="{{uid.city}}"
+              name="city"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="edit-state" class="form-label">State</label>
+            <input
+              type="text"
+              id="edit-state"
+              class="form-control"
+              value="{{uid.state}}"
+              name="state"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="edit-country" class="form-label">Country</label>
+            <input
+              type="text"
+              id="edit-country"
+              class="form-control"
+              value="{{uid.country}}"
+              name="country"
+            />
+          </div>
+          <div>
+            <label for="profile_image">Profile Image:</label>
+            {% if uid.profile_photo %}
+                <img src="{{ uid.profile_photo.url }}" alt="Profile Image" style="width: 150px; height: 150px; margin-bottom: 10px;">
+            {% else %}
+                <p>No profile image selected.</p>
+            {% endif %}
+            <!-- Input field for uploading a new image -->
+            <input type="file" id="profile_image" name="profile_photo1">
+          </div>
+          <div class="text-center mt-2">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Edit profile end -->
+
+    <!-- page content end -->
+{% endblock %}

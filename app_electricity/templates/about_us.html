@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <!-- page content start -->
+     <!-- Company Overview Section -->
+    <section class="container my-5 about-section-one">
+        <div class="row">
+            <div class="col-md-6 section-one-img">
+                <img src="{% static 'assets/images/bill-image.jpg' %}" alt="Electricity Company" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h2>Who We Are</h2>
+                <p>
+                    We are a leading platform dedicated to making electricity bill payments easy, secure, and convenient. Our service allows users to manage their electricity bills from the comfort of their homes with just a few clicks. We are committed to providing a seamless experience for our customers, ensuring that your power stays on, and your payments are handled efficiently.
+                </p>
+                <p>
+                    Our mission is to empower our users with the best tools to manage their energy consumption, stay informed about their electricity usage, and never miss a payment deadline. We partner with various electricity providers to bring you the most reliable service.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="bg-light py-5 about-section-two">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <img src="{% static 'assets/images/security.png' %}" alt="Security" class="img-fluid mb-3">
+                    <h4>Security</h4>
+                    <p>Your data and payments are protected with top-notch security measures.</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="{% static 'assets/images/convenience-store.png' %}" alt="Convenience" class="img-fluid mb-3">
+                    <h4>Convenience</h4>
+                    <p>Pay your bills anytime, anywhere, with our user-friendly platform.</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="{% static 'assets/images/customer-service.png' %}" alt="Support" class="img-fluid mb-3">
+                    <h4>Support</h4>
+                    <p>We’re here to help, with 24/7 customer support to address your needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team Section -->
+    <section class="container py-5 about-section-three">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2>Meet Our Team</h2>
+                <p>We are a group of dedicated professionals committed to serving you.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img src="{% static 'assets/images/person1.jpg' %}" alt="Team Member 1" class="img-fluid rounded-circle mb-3">
+                <h5>Dhruv Chudasama</h5>
+                <p>Web Developer</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="{% static 'assets/images/person2.jpg' %}" alt="Team Member 2" class="img-fluid rounded-circle mb-3">
+                <h5>Jane Doe</h5>
+                <p>UI/UX Designer</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="{% static 'assets/images/person3.jpg' %}" alt="Team Member 3" class="img-fluid rounded-circle mb-3">
+                <h5>John Smith</h5>
+                <p>Backend Developer</p>
+            </div>
+        </div>
+    </section>
+    <!-- page content end -->
+{% endblock %}

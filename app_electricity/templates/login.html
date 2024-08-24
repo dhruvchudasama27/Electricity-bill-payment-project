@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <!-- page content start -->
+    <div class="login">
+      <form class="login-form shadow border" action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <p class="login-form-title">Sign in to your account</p>
+        <div class="login-input">
+          <input type="email" placeholder="Enter email" name="email"/>
+          <span> </span>
+        </div>
+        <div class="login-input">
+          <input type="password" placeholder="Enter password" name="password"/>
+        </div>
+        <button type="submit" class="login-submit">Sign in</button>
+
+        <p class="signup-link">
+          No account?
+          <a href="{% url 'registration' %}">Sign up</a>
+        </p>
+        <p class="signup-link">
+            <a href="{%url 'otp_generate' %}">Forgot Password?</a>
+          </p>
+      </form>
+    </div>
+
+    <!-- page content end -->
+{% endblock %}

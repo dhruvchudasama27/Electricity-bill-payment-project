@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <!-- page content start -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="card paymentC-card mt-5 text-center mb-4">
+                    <div class="card-body">
+                        <img src="{% static 'assets/images/wallet.gif' %}" alt="Payment Success" class="img-fluid mb-4" style="max-width: 100px;">
+                        <h2 class="card-title paymentC-card-title mb-4 text-success paymentC-text-success">Payment Successful!</h2>
+                        <p class="mb-4">Thank you for your payment. Your electricity bill has been successfully paid.</p>
+
+                        <div class="mb-4 payment-detail">
+                            <h5>Transaction Details</h5>
+                            <p><strong>Transaction ID:</strong> #1234567890</p>
+                            <p><strong>Date:</strong> August 17, 2024</p>
+                            <p><strong>Amount:</strong> ₹1,500.00</p>
+                        </div>
+
+                        <p class="text-muted mb-4">A confirmation email has been sent to your registered email address.</p>
+
+                        <a href="{% url 'index' %}" class="btn btn-primary btn-block paymentC-btn-primary">Return to Homepage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- page content end -->
+{% endblock %}

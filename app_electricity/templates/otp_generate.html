@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <!-- page content start -->
+    <div class="login">
+      <form class="login-form shadow border">
+        <p class="login-form-title">Get OTP in your Email</p>
+        <div class="login-input">
+          <input type="email" placeholder="Enter email" />
+          <span> </span>
+        </div>
+        <button type="submit" class="login-submit">Get OTP</button>
+        <p class="signup-link">
+          <a href="{% url 'login' %}">Bck to login</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- page content end -->
+{% endblock %}

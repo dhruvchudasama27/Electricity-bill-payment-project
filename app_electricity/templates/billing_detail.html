@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <!-- page content start -->
+    <div class="m-2 bill-form">
+      <form action="{% url 'add_billing_detail' uid.id  %}" class="billing-form border shadow" method="POST">
+        {% csrf_token %}
+        <div class="billing-title">Welcome</div>
+        <div class="mt-1">
+            <label for="account" class="form-label">Account Number</label>
+            <input type="text" name="account_number" id="account" class="form-control">
+        </div>
+        <div class="mt-1">
+            <label for="customer" class="form-label">Customer Id</label>
+            <input type="text" name="customer_id" id="customer" class="form-control">
+        </div>
+        <div class="mt-1">
+            <label for="billingAddress" class="form-label">Billing Address</label>
+            <textarea name="billing_address" id="billingAddress" class="form-control"></textarea>
+        </div>
+        <div class="text-center mt-2">
+            <input type="submit" name="" id="" class="btn btn-primary" placeholder="" value="Add Billing Detail">
+        </div>
+      </form>
+    </div>
+    <!-- page content end -->
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <!-- page content start -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="card mt-5 payment-card mb-4">
+                    <div class="card-body text-center">
+                        <h2 class="card-title mb-4 payment-card-title">Make a Payment</h2>
+                        <p class="mb-4">Please choose your preferred payment method to complete the transaction.</p>
+
+                        <!-- Payment Method Dropdown -->
+                        <div class="mb-4">
+                            <label for="paymentMethod" class="form-label">Select Payment Method</label>
+                            <select id="paymentMethod" class="form-select payment-form-select" onchange="showPaymentMethod()">
+                                <option value="" disabled selected>Select your option</option>
+                                <option value="qr">Scan QR Code</option>
+                                <option value="upi">UPI ID</option>
+                                <option value="card">Credit/Debit Card</option>
+                            </select>
+                        </div>
+
+                        <!-- QR Code Payment Section -->
+                        <div id="qrSection" class="payment-section" style="display: none;">
+                            <h4 class="mb-3">Scan QR Code</h4>
+                            <img src="{% static 'assets/images/frame.png' %}" alt="QR Code" class="img-fluid mb-4" style="max-width: 200px;">
+                            <p class="text-muted">Scan with your payment app (Google Pay, PhonePe, Paytm, etc.)</p>
+                        </div>
+
+                        <!-- UPI ID Payment Section -->
+                        <div id="upiSection" class="payment-section" style="display: none;">
+                            <h4 class="mb-3">UPI ID</h4>
+                            <p class="text-muted">Send your payment to the following UPI ID:</p>
+                            <p class="lead">example@upi</p>
+                        </div>
+
+                        <!-- Credit/Debit Card Payment Section -->
+                        <div id="cardSection" class="payment-section" style="display: none;">
+                            <h4 class="mb-3">Credit/Debit Card</h4>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="cardNumber" class="form-label">Card Number</label>
+                                    <input type="text" class="form-control payment-form-control" id="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX">
+                                </div>
+                                <div class="mb-3 row">
+                                    <div class="col">
+                                        <label for="expiryDate" class="form-label">Expiry Date</label>
+                                        <input type="text" class="form-control payment-form-control" id="expiryDate" placeholder="MM/YY">
+                                    </div>
+                                    <div class="col">
+                                        <label for="cvv" class="form-label">CVV</label>
+                                        <input type="text" class="form-control payment-form-control" id="cvv" placeholder="XXX">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="cardHolderName" class="form-label">Cardholder Name</label>
+                                    <input type="text" class="form-control payment-form-control" id="cardHolderName" placeholder="Name on Card">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block payment-btn-primary">Pay Now</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- page content end -->
+{% endblock %}

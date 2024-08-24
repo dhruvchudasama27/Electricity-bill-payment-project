@@ -1,0 +1,166 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <!-- page content start -->
+    <div class="register">
+      <form class="register-form shadow border" action="{% url 'registration' %}" method="POST"  enctype="multipart/form-data">
+        {% csrf_token %}
+        <p class="register-title">Register</p>
+        <label>
+          <input
+            required=""
+            placeholder=""
+            type="text"
+            class="register-input"
+            name="full_name"
+          />
+          <span>Full name</span>
+        </label>
+        <label>
+          <input required="" placeholder="" type="tel" class="register-input" name="phone_number" />
+          <span>Phone number</span>
+        </label>
+        <label>
+          <input
+            required=""
+            placeholder=""
+            type="email"
+            class="register-input"
+            name="email"
+          />
+          <span>Email</span>
+        </label>
+        {% if message_for_email %}
+        <div class="text-center">
+          <p class="text-danger">{{message_for_email}}</p>
+        </div>
+        {% endif %}
+        {% if message_for_email_not_available %}
+        <div class="text-center">
+          <p class="text-danger">{{message_for_email_not_available}}</p>
+        </div>
+        {% endif %}
+        {% if message_for_email_failed %}
+        <div class="text-center">
+          <p class="text-danger">{{message_for_email_failed}}</p>
+        </div>
+        {% endif %}
+        <div class="register-flex">
+          <label>
+            <input
+              required=""
+              placeholder=""
+              type="text"
+              class="register-input"
+              id="input"
+              name="street_address"
+            />
+            <span>Street Address</span>
+          </label>
+          <label>
+            <input
+              required=""
+              placeholder=""
+              type="text"
+              class="register-input"
+              name="pincode"
+            />
+            <span>PinCode</span>
+          </label>
+        </div>
+        <div class="register-flex">
+          <label>
+            <input
+              required=""
+              placeholder=""
+              type="text"
+              class="register-input"
+              name="city"
+            />
+            <span>City</span>
+          </label>
+          <label>
+            <input
+              required=""
+              placeholder=""
+              type="text"
+              class="register-input"
+              name="state"
+            />
+            <span>State</span>
+          </label>
+          <label>
+            <input
+              required=""
+              placeholder=""
+              type="text"
+              class="register-input"
+              name="country"
+            />
+            <span>Country</span>
+          </label>
+        </div>
+        <label>
+          <input
+            required=""
+            placeholder=""
+            type="password"
+            class="register-input"
+            name="password"
+          />
+          <span>Password</span>
+        </label>
+        <label>
+          <input
+            required=""
+            placeholder=""
+            type="password"
+            class="register-input"
+            name="confirm_password"
+          />
+          <span>Confirm password</span>
+        </label>
+        {% if message_for_password_critearea %}
+        <div class="text-center">
+          <p class="text-danger">{{message_for_password_critearea}}</p>
+        </div>
+        {% endif %}
+        {% if message_for_password_not_same %}
+        <div class="text-center">
+          <p class="text-danger">{{message_for_password_not_same}}</p>
+        </div>
+        {% endif %}
+        {% if message_for_password_length %}
+        <div class="text-center">
+          <p class="text-danger">{{message_for_password_length}}</p>
+        </div>
+        {% endif %}
+        <label for="profile-photo">Select profile image
+        </label>
+          <input
+            type="file"
+            id="profile-photo"
+            class="register-input form-control"
+            accept="image/*"
+            name="profile_photo"
+          />
+          <p class="or">OR</p>
+          <div class="selfie-section">
+            <button type="button" class="btn btn-primary" onclick="openCamera()">Take Selfie</button>
+          </div>
+        <div class="m-1">
+          <input
+            required
+            type="checkbox"
+            class="form-check-input rounded border-info"
+          />
+          <span>Tearm & Conditions</span>
+        </div>
+        <button class="register-submit">Submit</button>
+        <p class="register-signin">
+          Already have an acount ? <a href="{% url 'login' %}">Signin</a>
+        </p>
+      </form>
+    </div>
+    <!-- page content end -->
+{% endblock %}
