@@ -7,12 +7,12 @@
         <div class="row mb-3">
             <div class="col-md-8">
                 <h4>Filter Payments</h4>
-                <form id="filter-form" class="row g-3">
+                <form id="filter-form" class="row g-3" action="{% url 'payment_filter' %}" method="GET">
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <input type="date" id="start-date" class="form-control Phistory-form-control" placeholder="Start Date">
+                        <input type="date" id="start-date" class="form-control Phistory-form-control" placeholder="Start Date" name="start_date">
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <input type="date" id="end-date" class="form-control Phistory-form-control " placeholder="End Date">
+                        <input type="date" id="end-date" class="form-control Phistory-form-control " placeholder="End Date" name="end_date">
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <button type="submit" class="btn btn-primary Phistory-btn-primary w-100">Apply Filter</button>
@@ -30,22 +30,22 @@
                         <th>Transaction ID</th>
                         <th>Amount</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="payment-history">
                     <!-- Sample Data (Replace with dynamic data) -->
+                    {% for i in get_payment_history %}
                     <tr>
-                        <td>2024-08-01</td>
-                        <td>#123456</td>
-                        <td>$100.00</td>
-                        <td>Completed</td>
+                        <td>{{i.date|date:"Y-m-d"}}</td>
+                        <td>{{i.payment_order}}</td>
+                        <td>${{i.amount}}</td>
+                        <td>{{i.status}}</td>
+                        <td>
+                            <a href="{% url 'download_bill' i.id %}" class="btn btn-success btn-sm">Download</a>
+                        </td>
                     </tr>
-                    <tr>
-                        <td>2024-08-05</td>
-                        <td>#123457</td>
-                        <td>$150.00</td>
-                        <td>Pending</td>
-                    </tr>
+                    {% endfor %}
                     <!-- More rows can be dynamically added here -->
                 </tbody>
             </table>

@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Electricity bill</title>
+    <title>{{title}}</title>
     <link rel="icon" type="image/png" href="{% static 'assets/images/flash.png' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
@@ -39,13 +39,9 @@
             <li class="nav-item p-1">
               <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
             </li>
+            {% if request.session.email %}
             <li class="nav-item p-1">
-              <a class="nav-link active" aria-current="page" href="#"
-                >View Bill</a
-              >
-            </li>
-            <li class="nav-item p-1">
-              <a class="nav-link active" aria-current="page" href="#"
+              <a class="nav-link active" aria-current="page" href="{% url 'payment' %}"
                 >Pay Bill</a
               >
             </li>
@@ -54,14 +50,15 @@
                 >Payment History</a
               >
             </li>
-            <li class="nav-item p-1">
-              <a class="nav-link active" aria-current="page" href="#"
-                >Tariff Rates</a
-              >
-            </li>
+            {% endif %}
             <li class="nav-item p-1">
               <a class="nav-link active" aria-current="page" href="{% url 'contact_us' %}"
                 >Support</a
+              >
+            </li>
+            <li class="nav-item p-1">
+              <a class="nav-link active" aria-current="page" href="{% url 'about_us' %}"
+                >About Us</a
               >
             </li>
             {% if request.session.email %}
@@ -77,6 +74,9 @@
               {% if request.session.email %}
               <li class="nav-item p-1">
                 <a href="{% url 'logout' %}" class="nav-link active">logout</a>
+              </li>
+              <li class="nav-item p-1">
+                <a href="{% url 'feedback' %}" class="nav-link active">Feedback</a>
               </li>
               {% else %}
               <li class="nav-item p-1">
@@ -129,30 +129,26 @@
                   <h3 class="text-center">Latest Electricity News</h3>
                   <marquee behavior="scroll" direction="up" scrollamount="2" class="mt-3">
                       <ul>
-                          <li>New green energy initiatives launched nationwide.</li>
-                          <li>Electricity prices expected to decrease by 5% next month.</li>
-                          <li>Government introduces subsidies for energy-efficient appliances.</li>
-                          <li>Upcoming power outage scheduled for maintenance on 5th Aug.</li>
+                        {% for i in get_news %}
+                          <li>{{i.news}}</li>
+                        {% endfor %}
                       </ul>
                   </marquee>
               </div>
+              {% if get_rate %}
               <div class="col-md-6">
                   <h3 class="text-center">Last 12 Months Electricity Rates</h3>
                   <marquee behavior="scroll" direction="up" scrollamount="2" class="mt-3">
+                    <div class="d-flex">
                       <ul>
-                          <li>August: $0.12/kWh</li>
-                          <li>July: $0.13/kWh</li>
-                          <li>June: $0.11/kWh</li>
-                          <li>May: $0.10/kWh</li>
-                          <li>April: $0.09/kWh</li>
-                          <li>March: $0.08/kWh</li>
-                          <li>February: $0.07/kWh</li>
-                          <li>January: $0.06/kWh</li>
-                          <li>December: $0.05/kWh</li>
-                          <li>November: $0.04/kWh</li>
+                        {% for rate in get_rate %}
+                          <li>{{rate.date|date:"F Y"}} : ₹ {{rate.rate}}/kWh</li>
+                        {% endfor %}
                       </ul>
+                    </div>
                   </marquee>
               </div>
+              {% endif %}
           </div>
       </div>
   </section>
@@ -183,78 +179,26 @@
           <h3 class="text-center mb-4">Latest Customer Reviews</h3>
           <div class="row">
               <div class="col-md-6">
+                {% for i in get_feedback|slice:":5" %}
                   <div class="d-flex mb-3">
-                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 1" style="width: 50px; height: 50px;">
-                      <div class="ml-3">
-                          <strong>Sarah</strong>
-                          <p>"Great service, always reliable!"</p>
+                      <img src="{{i.image.url}}" class="rounded-circle" alt="Customer 1" style="width: 50px; height: 50px;">
+                      <div class="ml-3 ms-2">
+                          <strong>{{i.name}}</strong>
+                          <p>"{{i.feedback_message}}"</p>
                       </div>
                   </div>
-                  <div class="d-flex mb-3">
-                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 2" style="width: 50px; height: 50px;">
-                      <div class="ml-3">
-                          <strong>Michael</strong>
-                          <p>"Quick and easy bill payments."</p>
-                      </div>
-                  </div>
-                  <div class="d-flex mb-3">
-                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 3" style="width: 50px; height: 50px;">
-                      <div class="ml-3">
-                          <strong>Emily</strong>
-                          <p>"Friendly customer support."</p>
-                      </div>
-                  </div>
-                  <div class="d-flex mb-3">
-                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 4" style="width: 50px; height: 50px;">
-                      <div class="ml-3">
-                          <strong>David</strong>
-                          <p>"Highly recommend this company."</p>
-                      </div>
-                  </div>
-                  <div class="d-flex mb-3">
-                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 5" style="width: 50px; height: 50px;">
-                      <div class="ml-3">
-                          <strong>Jessica</strong>
-                          <p>"The website is user-friendly."</p>
-                      </div>
-                  </div>
+                {% endfor %}
               </div>
               <div class="col-md-6">
+                {% for i in get_feedback|slice:"5:10" %}
                   <div class="d-flex mb-3">
-                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 6" style="width: 50px; height: 50px;">
-                      <div class="ml-3">
-                          <strong>Robert</strong>
-                          <p>"Efficient and trustworthy."</p>
+                      <img src="{{i.image.url}}" class="rounded-circle" alt="Customer 1" style="width: 50px; height: 50px;">
+                      <div class="ml-3 ms-2">
+                          <strong>{{i.name}}</strong>
+                          <p>"{{i.feedback_message}}"</p>
                       </div>
                   </div>
-                  <div class="d-flex mb-3">
-                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 7" style="width: 50px; height: 50px;">
-                      <div class="ml-3">
-                          <strong>Linda</strong>
-                          <p>"I've been a customer for years."</p>
-                      </div>
-                  </div>
-                  <div class="d-flex mb-3">
-                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 8" style="width: 50px; height: 50px;">
-                      <div class="ml-3">
-                          <strong>Paul</strong>
-                          <p>"They keep improving their services."</p>
-                      </div>
-                  </div>
-                  <div class="d-flex mb-3">
-                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 9" style="width: 50px; height: 50px;">
-                      <div class="ml-3">
-                          <strong>Karen</strong>
-                          <p>"Good value for money."</p>
-                      </div>
-                  </div>
-                  <div class="d-flex mb-3">
-                      <img src="https://picsum.photos/50/50" class="rounded-circle" alt="Customer 10" style="width: 50px; height: 50px;">
-                      <div class="ml-3">
-                          <strong>James</strong>
-                          <p>"Excellent overall experience."</p>
-                      </div>
-                  </div>
+                {% endfor %}
               </div>
           </div>
       </div>
@@ -293,17 +237,17 @@
           <div class="col-md-3 col-sm-6 mt-1">
             <h3>About Us</h3>
             <ul>
-              <li><a href="#">Our Story</a></li>
-              <li><a href="#">Our Team</a></li>
-              <li><a href="#">Contact Us</a></li>
+              <li><a href="{% url 'about_us' %}">Our Story</a></li>
+              <li><a href="{% url 'about_us' %}">Our Team</a></li>
+              <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
             </ul>
           </div>
           <div class="col-md-3 col-sm-6 mt-1">
             <h3>Help</h3>
             <ul>
-              <li><a href="#">FAQs</a></li>
-              <li><a href="#">Support</a></li>
-              <li><a href="#">Terms and Conditions</a></li>
+              <li><a href="{% url 'faq' %}">FAQs</a></li>
+              <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
+              <li><a href="{% url 'terms' %}">Terms and Conditions</a></li>
             </ul>
           </div>
           <div class="col-md-3 col-sm-6 mt-1">
@@ -330,15 +274,15 @@
             <h3>Payment Methods</h3>
             <ul class="paymnet">
               <li>
-                <a href="#"><img src="{% static 'assets/images/visa.png' %}" alt="" />Visa</a>
+                <a href="{% url 'payment' %}"><img src="{% static 'assets/images/visa.png' %}" alt="" />Visa</a>
               </li>
               <li>
-                <a href="#"
+                <a href="{% url 'payment' %}"
                   ><img src="{% static 'assets/images/card.png' %}" alt="" />MasterCard</a
                 >
               </li>
               <li>
-                <a href="#"
+                <a href="{% url 'payment' %}"
                   ><img
                     src="{% static 'assets/images/payment-method.png' %}"
                     alt=""
@@ -349,7 +293,7 @@
           </div>
         </div>
         <p class="text-center mt-2">
-          &copy; 2024 Electricity Bill Payment Website. All rights reserved.
+          &copy; 2024 ElectraPay. All rights reserved.
         </p>
       </div>
     </footer>

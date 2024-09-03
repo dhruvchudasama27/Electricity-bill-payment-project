@@ -3,12 +3,15 @@
 {% block content %}
     <!-- page content start -->
     <div class="login">
-      <form class="login-form shadow border">
+      <form class="login-form shadow border" method="POST" action="{% url 'otp_generate' %}">
+        {% csrf_token %}
         <p class="login-form-title">Get OTP in your Email</p>
         <div class="login-input">
-          <input type="email" placeholder="Enter email" />
-          <span> </span>
+          <input type="email" placeholder="Enter email" name="email"/>
         </div>
+        {% if wrong_email %}
+        <div>{{wrong_email}}</div>
+        {% endif %}
         <button type="submit" class="login-submit">Get OTP</button>
         <p class="signup-link">
           <a href="{% url 'login' %}">Bck to login</a>

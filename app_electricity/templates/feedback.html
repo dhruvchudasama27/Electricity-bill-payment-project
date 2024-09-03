@@ -1,0 +1,95 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>Feedback for Payment</h3>
+                    <p>We value your feedback. Please share your experience with us.</p>
+                </div>
+                <div class="card-body">
+                    <form id="feedback-form" method="POST" action="{% url 'feedback' %}">
+                        {% csrf_token %}
+                        
+                        <div class="form-group text-center">
+                            <label for="feedback" class="fw-bold fs-4 mb-2 ">Your Feedback</label>
+                            <textarea id="feedback" name="feedback" class="form-control" rows="5" placeholder="Enter your feedback here..." required></textarea>
+                        </div>
+
+                        <div class="form-group mt-4 text-center">
+                            <button type="submit" id="submit-btn" class="btn btn-primary">Submit Feedback</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thank You Pop-up -->
+<div id="thank-you-popup" class="modal fade" tabindex="-1" aria-labelledby="thank-you-popup-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="thank-you-popup-label">Thank You!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Thank you for your feedback!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- JavaScript for form validation and modal -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var feedbackForm = document.getElementById('feedback-form');
+        var submitBtn = document.getElementById('submit-btn');
+        var feedbackTextarea = document.getElementById('feedback');
+        
+        // Disable the submit button initially
+        submitBtn.disabled = true;
+
+        // Enable the button if feedback text is entered
+        feedbackTextarea.addEventListener('input', function() {
+            submitBtn.disabled = !feedbackTextarea.value.trim();
+        });
+
+        // Handle form submission
+        feedbackForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            var formData = new FormData(feedbackForm);
+
+            fetch(feedbackForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show the thank you pop-up
+                    var myModal = new bootstrap.Modal(document.getElementById('thank-you-popup'));
+                    myModal.show();
+
+                    // Redirect or reload after 3 seconds
+                    setTimeout(function() {
+                        myModal.hide();
+                        window.location.href = '{% url "index" %}'; // Replace with desired redirect URL
+                    }, 3000);
+                } else {
+                    // Handle error response
+                    alert('There was an error submitting your feedback.');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -645,46 +645,6 @@ label[for="profile-photo"] {
 
 /* payment start */
 
-.payment-card {
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.payment-card-title {
-  font-size: 24px;
-  color: #007bff;
-}
-
-.payment-form-control,
-.payment-form-select {
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: none;
-}
-
-.payment-btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  padding: 10px;
-  font-size: 18px;
-  width: 100%;
-  border-radius: 5px;
-}
-
-.payment-btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #004085;
-}
-
-.payment-section {
-  margin-bottom: 30px;
-}
-
-.payment-section img {
-  max-width: 200px;
-  margin-bottom: 20px;
-}
-
 /* payment end */
 
 /* payment confirmation start */
